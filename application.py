@@ -51,6 +51,30 @@ def index():
     return "Hello world"
 
 
+@app.route('/api/v1/users', methods=["GET"])
+def get_users():
+    return jsonify([{
+        f'user_{index}': user['username']
+    } for index, user in enumerate(users)])
+
+
+@app.route('/api/v1/users/<username>', methods=["GET"])
+def get_user(username):
+    username_list = [user['username'] for user in users]
+
+    username_index = -1
+    try:
+        username_index = username_list.index(username)
+    except:
+        return 'no user found'
+
+    user_tweets = [tweet for tweet in tweets if username in tweet.keys()]
+    return jsonify([{
+        'username': username,
+        'tweet_count': len(user_tweets)
+    }, user_tweets])
+
+
 @app.route('/api/v1/tweets', methods=["GET", "POST"])
 def get_tweets():
     if request.method == "GET":

@@ -2,6 +2,12 @@ curl -X POST 127.0.0.1:5000/api/v1/login -F 'username=alex' -F 'password=alex' -
 
 curl -X GET 127.0.0.1:5000/api/v1/tweets --output -
 
+curl -X GET 127.0.0.1:5000/api/v1/users --output -
+
+curl -X GET 127.0.0.1:5000/api/v1/users/alex --output -
+
+curl -X GET 127.0.0.1:5000/api/v1/users/admin --output -
+
 curl -X GET 127.0.0.1:5000/api/v1/tweets/0 --output -
 
 curl -X POST 127.0.0.1:5000/api/v1/tweets -F 'tweet=is the post request working?' -b cookie_alex.txt -c cookie_alex.txt --output -
