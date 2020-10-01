@@ -51,21 +51,12 @@ def index():
     return "Hello world"
 
 
-@app.route('/api/v1/view/tweets', methods=["GET"])
+@app.route('/api/v1/tweets', methods=["GET", "POST"])
 def get_tweets():
-    return jsonify([{'tweet_count': len(tweets)}, tweets])
+    if request.method == "GET":
+        return jsonify([{'tweet_count': len(tweets)}, tweets])
 
-
-@app.route('/api/v1/view/tweet/<tweet_index>', methods=["GET"])
-def get_tweet(tweet_index):
-    return jsonify(tweets[int(tweet_index)])
-
-
-@app.route('/api/v1/new/tweet', methods=["POST"])
-@login_required
-def post_tweet():
-
-    if request.method == "POST":
+    elif request.method == "POST":
 
         # ensure username was submitted
         if not request.form.get("tweet"):
@@ -82,11 +73,12 @@ def post_tweet():
     return 'error'
 
 
-@app.route('/api/v1/delete/tweet/<tweet_index>', methods=["DELETE"])
-@login_required
-def delete_tweet(tweet_index):
+@app.route('/api/v1/tweets/<tweet_index>', methods=["GET", "DELETE"])
+def get_tweet(tweet_index):
+    if request.method == "GET":
+        return jsonify(tweets[int(tweet_index)])
 
-    if request.method == "DELETE":
+    elif request.method == "DELETE":
         user_id = session["user_id"]
         username = users[user_id]['username']
 

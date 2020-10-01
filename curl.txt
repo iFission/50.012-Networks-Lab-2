@@ -1,9 +1,9 @@
 curl -X POST 127.0.0.1:5000/api/v1/login -F 'username=alex' -F 'password=alex' -b cookie_alex.txt -c cookie_alex.txt --output -
 
-curl -X GET 127.0.0.1:5000/api/v1/view/tweets --output -
+curl -X GET 127.0.0.1:5000/api/v1/tweets --output -
 
-curl -X GET 127.0.0.1:5000/api/v1/view/tweet/0 --output -
+curl -X GET 127.0.0.1:5000/api/v1/tweets/0 --output -
 
-curl -X POST 127.0.0.1:5000/api/v1/new/tweet -F 'tweet=is the post request working?' -b cookie_alex.txt -c cookie_alex.txt --output -
+curl -X POST 127.0.0.1:5000/api/v1/tweets -F 'tweet=is the post request working?' -b cookie_alex.txt -c cookie_alex.txt --output -
 
-curl -X DELETE 127.0.0.1:5000/api/v1/delete/tweet/0 -b cookie_alex.txt -c cookie_alex.txt --output -
+curl -X DELETE 127.0.0.1:5000/api/v1/tweets/0 -b cookie_alex.txt -c cookie_alex.txt --output -
