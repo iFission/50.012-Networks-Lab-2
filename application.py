@@ -76,6 +76,7 @@ def get_user(username):
 
 
 @app.route('/api/v1/tweets', methods=["GET", "POST"])
+@login_required
 def get_tweets():
     if request.method == "GET":
         return jsonify([{'tweet_count': len(tweets)}, tweets])
@@ -98,6 +99,7 @@ def get_tweets():
 
 
 @app.route('/api/v1/tweets/<tweet_index>', methods=["GET", "DELETE"])
+@login_required
 def get_tweet(tweet_index):
     if request.method == "GET":
         return jsonify(tweets[int(tweet_index)])
@@ -152,7 +154,7 @@ def login():
         session["user_id"] = user_id
 
         # redirect user to home page
-        return "200"
+        return "200\n"
 
 
 if __name__ == "__main__":
