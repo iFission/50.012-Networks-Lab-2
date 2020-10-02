@@ -60,6 +60,7 @@ def get_users():
 
 @app.route('/api/v1/users/<username>', methods=["GET"])
 def get_user(username):
+    print(request.headers)
     username_list = [user['username'] for user in users]
 
     username_index = -1
@@ -69,10 +70,22 @@ def get_user(username):
         return 'no user found'
 
     user_tweets = [tweet for tweet in tweets if username in tweet.keys()]
-    return jsonify([{
-        'username': username,
-        'tweet_count': len(user_tweets)
-    }, user_tweets])
+
+    if request.headers['Accept'] == 'text/text':
+        response = ""
+        response += f"User {username} has {len(user_tweets)} tweets\n"
+        response += "Tweets:\n"
+
+        for user_tweet in user_tweets:
+            response += f'{username}: {user_tweet[username]}\n'
+
+        return response
+
+    else:
+        return jsonify([{
+            'username': username,
+            'tweet_count': len(user_tweets)
+        }, user_tweets])
 
 
 @app.route('/api/v1/tweets', methods=["GET", "POST"])

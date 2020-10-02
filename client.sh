@@ -1,8 +1,11 @@
 # get all users
 curl -X GET 127.0.0.1:5000/api/v1/users --output -
 
-# get user alex's info
+# get user alex's info (in application/json)
 curl -X GET 127.0.0.1:5000/api/v1/users/alex --output -
+
+# get user alex's info in text/plain
+curl -X GET -H "Accept: text/plain" 127.0.0.1:5000/api/v1/users/alex --output -
 
 # get user admin's info
 curl -X GET 127.0.0.1:5000/api/v1/users/admin --output -
