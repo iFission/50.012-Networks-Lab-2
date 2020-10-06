@@ -71,7 +71,7 @@ def get_user(username):
 
     user_tweets = [tweet for tweet in tweets if username in tweet.keys()]
 
-    if request.headers['Accept'] == 'text/text':
+    if request.headers['Accept'] == 'text/plain':
         response = ""
         response += f"User {username} has {len(user_tweets)} tweets\n"
         response += "Tweets:\n"
